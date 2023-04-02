@@ -5,7 +5,9 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="user")
+@Document(collection = "user") // Para dizer que essa classe User corresponde a uma coleção do MongoDB, é
+								// colocar essa anotação, onde user em minusculo corresponde ao nome que foi
+								// inserido no banco.
 public class User implements Serializable { // Padrão do java para que os objetos possam ser convertidos em bites, para
 											// usar e trafegar em rede e arquivos.
 	private static final long serialVersionUID = 1L;

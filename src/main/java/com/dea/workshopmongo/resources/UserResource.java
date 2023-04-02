@@ -15,6 +15,9 @@ import com.dea.workshopmongo.services.UserService;
 @RequestMapping(value = "/users") // Caminho do endpoint usando o recurso /users
 public class UserResource {
 
+	// Pensando nas camadas, o Controlador Rest precisa conversar com o serviço. Da
+	// mesma forma que injetei o repository la no service, aqui vou injetar ou
+	// declarar o serviço.
 	@Autowired
 	private UserService service;
 
@@ -27,3 +30,5 @@ public class UserResource {
 	}
 
 }
+
+//Aqui fica claro as camadas, onde um controlador Rest acessa os serviços.
