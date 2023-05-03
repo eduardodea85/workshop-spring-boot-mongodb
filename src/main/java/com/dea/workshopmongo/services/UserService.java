@@ -1,12 +1,14 @@
 package com.dea.workshopmongo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dea.workshopmongo.domain.User;
 import com.dea.workshopmongo.repository.UserRepository;
+import com.dea.workshopmongo.services.exception.ObjectNotFoundException;
 
 //Criar o serviço responsável por trabalhar com os usuários.
 //Para eu dizer ao spring que essa vai ser um serviço que pode ser injetavel em outras classes tenho que por a anotação @Service 
@@ -26,6 +28,11 @@ public class UserService {
 									// todos os usuários do banco
 		return repo.findAll(); // chamando o retorno da instancia que criamos para puxar do banco as
 								// informações.
+	}
+	
+	public User findById(String id) {
+		Optional<User> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));		
 	}
 
 }
