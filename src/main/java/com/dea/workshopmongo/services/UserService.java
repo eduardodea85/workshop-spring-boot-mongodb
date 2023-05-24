@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dea.workshopmongo.domain.User;
+import com.dea.workshopmongo.dto.UserDTO;
 import com.dea.workshopmongo.repository.UserRepository;
 import com.dea.workshopmongo.services.exception.ObjectNotFoundException;
 
@@ -33,6 +34,14 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));		
+	}
+	
+	public User insert(User obj) { //public User porque vai retornar o objeto inserido, recebendo o User obj como argumento
+		return repo.insert(obj); //Esse método retorna o repositorio insert passando o obj como argumento. Como o repositorio ele retorna o objeto, mantivemos o padrão User no serviço 
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail()); //new User recebendo os dados do DTO como paramêtro. Já temos um construtor que pega esses dados.
 	}
 
 }
