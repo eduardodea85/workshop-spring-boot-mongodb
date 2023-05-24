@@ -45,6 +45,18 @@ public class UserService {
 		repo.deleteById(id);
 	}
 	
+	//Um detalhe importante. O obj que vai como arguemento, vai ser os dados que o usuário enviar na requisição. Esses dados não tem nenhum vinculo ainda com o banco de dados. Pra atualizar, vamos buscar o objeto original que está no banco de dados, alterar esse objeto com os dados enviados na requisição e salvar o objeto que buscou. Primeiro passo é instanciar um objeto Usuario User newObj. Esse objeto buscamos do banco de dados usando repo.findOne usando o id que veio no obj passado como parametro obj.getId. NewObj é o objeto original do banco de dados.
+	public User update(User obj) {
+		User newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+		}
+	
+	private void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
+
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail()); //new User recebendo os dados do DTO como paramêtro. Já temos um construtor que pega esses dados.
 	}

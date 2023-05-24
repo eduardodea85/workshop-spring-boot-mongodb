@@ -18,7 +18,7 @@ import com.dea.workshopmongo.dto.UserDTO;
 import com.dea.workshopmongo.services.UserService;
 
 @RestController // Informo que essa classe é um recurso Rest
-@RequestMapping(value = "/users") // Caminho do endpoint usando o recurso /users
+@RequestMapping(value = "/users/") // Caminho do endpoint usando o recurso /users
 public class UserResource {
 
 	// Pensando nas camadas, o Controlador Rest precisa conversar com o serviço. Da
@@ -54,6 +54,14 @@ public class UserResource {
 		service.delete(id); //chamando o service.delete passando o id como argumento. Se tudo der certe, retorna uma resposta.
 		return ResponseEntity.noContent().build();//Essa resposta quando faz uma operação e não precisa retornar nada, vai ser uma resposta com o código 204. O código 204 no ResonseEntity é o noContent
 	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody	UserDTO objDto, @PathVariable String id) {
+		User obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	} 
 
 }
 
