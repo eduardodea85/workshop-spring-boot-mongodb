@@ -48,6 +48,12 @@ public class UserResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();//Pega o objeto do novo endereço que iseriu
 		return ResponseEntity.created(uri).build();//created retorna o código 201, que é o código de resposta http quando se cria o novo recurso. E aí passa o uri como argumento.Esse comando vai retornar uma resposta vazia, com o código 201 e com o cabeçalho contendo a localização do novo recurso criado.
 	} 
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id) {//Resposta do método vazia Void.
+		service.delete(id); //chamando o service.delete passando o id como argumento. Se tudo der certe, retorna uma resposta.
+		return ResponseEntity.noContent().build();//Essa resposta quando faz uma operação e não precisa retornar nada, vai ser uma resposta com o código 204. O código 204 no ResonseEntity é o noContent
+	}
 
 }
 

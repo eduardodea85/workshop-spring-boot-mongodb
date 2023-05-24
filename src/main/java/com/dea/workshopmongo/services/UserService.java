@@ -40,6 +40,11 @@ public class UserService {
 		return repo.insert(obj); //Esse método retorna o repositorio insert passando o obj como argumento. Como o repositorio ele retorna o objeto, mantivemos o padrão User no serviço 
 	}
 	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
+	
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail()); //new User recebendo os dados do DTO como paramêtro. Já temos um construtor que pega esses dados.
 	}
