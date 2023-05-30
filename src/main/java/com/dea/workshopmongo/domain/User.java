@@ -21,7 +21,7 @@ public class User implements Serializable { // Padrão do java para que os objet
 	private String email;
 	
 	@DBRef(lazy = true)//lazy significa que os post só vão ser carregados na lista se eu acessa-los.
-	private List<Post> posts = new ArrayList<>();
+	private List<Post> posts = new ArrayList<>();//Associação dos usuários com os posts
 
 	public User() {
 	}
