@@ -1,8 +1,11 @@
 package com.dea.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user") // Para dizer que essa classe User corresponde a uma coleção do MongoDB, é
@@ -16,6 +19,9 @@ public class User implements Serializable { // Padrão do java para que os objet
 	private String id;
 	private String name;
 	private String email;
+	
+	@DBRef(lazy = true)//lazy significa que os post só vão ser carregados na lista se eu acessa-los.
+	private List<Post> posts = new ArrayList<>();
 
 	public User() {
 	}
@@ -50,6 +56,14 @@ public class User implements Serializable { // Padrão do java para que os objet
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,4 +89,6 @@ public class User implements Serializable { // Padrão do java para que os objet
 			return false;
 		return true;
 	}
+
+	
 }
